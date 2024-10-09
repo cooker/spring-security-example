@@ -5,4 +5,6 @@ public interface SecurityConstants {
     String ROLE = "ROLE_";
 
     String LOGIN_URL = "/login";
+
+    String LOGOUT_URL = "/logout";
 }

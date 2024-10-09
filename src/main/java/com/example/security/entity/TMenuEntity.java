@@ -22,4 +22,8 @@ public class TMenuEntity {
     private Integer deleteCd;
     private Date createTime;
     private Date updateTime;
+
+    public enum TypeCdEnum {
+        MEMU, CHILD_MEMU, BUTTON
+    }
 }

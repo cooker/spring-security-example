@@ -1,6 +1,8 @@
 package com.example.security.filter;
 
+import cn.hutool.extra.spring.SpringUtil;
 import com.example.security.model.SysUserDTO;
+import com.example.security.service.UserInfoService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,7 +14,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
  * grant
@@ -33,11 +34,7 @@ public class JwtValidationFilter extends OncePerRequestFilter {
         String token = request.getParameter("token");
         if (!StringUtils.isEmpty(token)) {
             log.info("解析 token：{}", token);
-            SysUserDTO sysUserDTO = new SysUserDTO();
-            sysUserDTO.setUsername(token);
-            sysUserDTO.setId(1L);
-            sysUserDTO.setEnabled(true);
-            sysUserDTO.setRoles(List.of("admin"));
+            SysUserDTO sysUserDTO = SpringUtil.getBean(UserInfoService.class).findUser(token);
             SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken(sysUserDTO, "", sysUserDTO.getAuthorities()));
         }
 

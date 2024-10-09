@@ -1,6 +1,8 @@
-#security:
+security:
 #  ignoreUrls:
-#    -
+# -
+  jwt:
+    key: 123456
 # DataSource Config
 spring:
   datasource:
